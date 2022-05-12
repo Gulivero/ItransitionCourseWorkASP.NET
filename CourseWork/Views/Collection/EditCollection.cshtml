@@ -1,0 +1,47 @@
+﻿@model CourseWork.ViewModels.EditCollectionViewModel
+
+@{
+    ViewData["Title"] = "Edit Collection";
+}
+<div id="editCollection" class="container p-xl-3">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-8 text-lg-center pb-4">
+            <h2 class="h4">Редактирование коллекции</h2>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-4 shadow pt-3 pb-1 mb-2 bg-white rounded">
+            <form class="form-group" method="post" asp-controller="Collection" asp-action="EditCollection">
+                <input type="hidden" asp-for="Id" value="@ViewBag.Collection.Id">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input class="form-control shadow-sm bg-white rounded" asp-for="Name" placeholder="Введите название" value="@ViewBag.Collection.Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input class="form-control shadow-sm bg-white rounded" asp-for="Description" placeholder="Введите Описание" value="@ViewBag.Collection.Description">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div></div>
+@*                <div class="form-group">
+                    <label asp-for="Image"></label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label form-control shadow-sm bg-white rounded" for="customFile">Выбрать файл</label>
+                        <input type="hidden" id="file-upload-url" asp-for="Image" value="@ViewBag.Collection.Image"/>
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="card border-white mt-1">
+                        <img src="@ViewBag.Collection.Image" id="img-preview"/>
+                    </div>
+                </div>*@
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block">Отредактировать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

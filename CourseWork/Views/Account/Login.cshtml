@@ -1,0 +1,37 @@
+﻿@model CourseWork.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Авторизация";
+}
+<div id="signIn" class="container p-xl-3">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-8 text-lg-center pb-4">
+            <h2 class="h4">Вход в аккаунт</h2>
+        </div>
+    </div>
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-5 shadow pt-3 pb-1 mb-2 bg-white rounded">
+            <form method="post" asp-controller="Account" asp-action="Login"
+                  asp-route-returnUrl="@Model.ReturnUrl">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="form-label"></label><br />
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label><br />
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-check">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    <label asp-for="RememberMe"></label>
+                </div>
+                <div>
+                    <input class="btn btn-primary btn-block rounded mb-3" type="submit" value="Войти" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

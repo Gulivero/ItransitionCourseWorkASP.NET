@@ -1,0 +1,106 @@
+﻿@using CourseWork.Models
+@using CourseWork.ViewModels
+@model UsersAndRolesViewModel
+
+@{
+    ViewBag.Title = "Панель администратора";
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    function toggle(source) {
+        checkboxes = document.getElementsByName('usersId');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
+@Html.ValidationSummary()
+<div class="container bg-white rounded mt-3 shadow pt-3">
+    <div class="row">
+        <div class="col-lg-12 pl-3">
+            <h1 class="h4">Панель администратора</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 mt-3 pt-3 pb-1">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link btn-block rounded active" data-toggle="tab" href="#users">Все пользователи</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="users" class="tab-pane fade show active mt-3">
+                    <form asp-action="Edit" method="post">
+                        <div class="btn-group-sm d-flex justify-content-between">
+                            <div>
+                                <button type="submit" name="action" value="Delete" class="btn btn-danger btn-xs">Удалить</button>
+                                <button type="submit" name="action" value="Block" class="btn btn-danger btn-xs">Заблокировать</button>
+                                <button type="submit" name="action" value="Unblock" class="btn btn-primary btn-xs">Разблокировать</button>
+                            </div>
+                            <div>
+                                <button type="submit" name="action" value="Admin" class="btn btn-primary btn-xs">Добавить роль админа</button>
+                                <button type="submit" name="action" value="User" class="btn btn-danger btn-xs">Убрать роль админа</button>
+                            </div>
+                        </div>
+
+                        <form id="frm1">
+                            <table class="table table-hover mt-3">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th><input type='checkbox' name='checkall' onclick='toggle(this);'> Выделить всё</th>
+                                        <th>Id</th>
+                                        <th>Имя</th>
+                                        <th>Email</th>
+                                        <th>Дата регистрации</th>
+                                        <th>Дата последнего логина</th>
+                                        <th>Статус</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Users.Count() == 0)
+                                    {
+                                        <tr>
+                                            <td colspan="7" class="text-center">Нет ни одной учетной записи</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (User user in Model.Users)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="usersId" value="@user.Id">
+                                                </td>
+                                                <td>@user.Id</td>
+                                                <td><a asp-controller="Profile" asp-action="Profile" asp-route-id="@user.Id">@user.UserName</a></td>
+                                                <td>@user.Email</td>
+                                                <td>@user.RegistrationDate</td>
+                                                <td>@user.LastLoginDate</td>
+                                                <td>
+                                                    @{
+                                                        if (await Model.userManager.IsInRoleAsync(user, "Admin"))
+                                                        {
+                                                            <span>Admin</span>
+                                                        }
+                                                        if (await Model.userManager.IsInRoleAsync(user, "Unblocked"))
+                                                        {
+                                                            <span>Unblocked</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>Blocked</span>
+                                                        }
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
