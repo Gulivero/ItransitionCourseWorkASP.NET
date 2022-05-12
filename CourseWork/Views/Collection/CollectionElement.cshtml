@@ -1,7 +1,15 @@
-﻿@model CourseWork.ViewModels.CommentViewModel
+﻿@model CourseWork.ViewModels.CollectionElementViewModel
 @{
     ViewData["Title"] = $"{ViewBag.CollectionElement.Name}";
 }
+<style>
+.btn-rounded {
+    border-radius: 19px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+}
+</style>
 <div id="collection" class="container mt-5">
     <div class="row shadow pt-1 pb-1 mb-2 bg-white rounded">
         <div class="col-lg-12 mt-2 justify-content-between custom-control-inline">
@@ -42,17 +50,44 @@
                 }
             }
         </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="d-flex justify-content-end">
+                <form class="" method="post" asp-controller="Collection">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <input type="hidden" asp-for="LikeViewModel.UserId" value="@User.Claims.ElementAt(0).Value" />
+                    <input type="hidden" asp-for="LikeViewModel.CollectionElementId" value="@ViewBag.CollectionElement.Id" />
+                    <div>
+                        @{
+                            List<Like> likes = new List<Like>(ViewBag.CollectionElement.Likes);
+                            if (likes.Any(i => i.User.Id == User.Claims.ElementAt(0).Value))
+                            {
+                                <button type="submit" class="btn btn-danger btn-rounded ml-3" asp-action="CollectionElementUnLike" asp-controller="Collection">
+                                    <img class="ml-2" src="https://img.icons8.com/ios/30/000000/thumbs-down.png" /><span class="badge badge-light ml-2 mt-2">@likes.Count</span>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-success btn-rounded ml-3" asp-action="CollectionElementLike" asp-controller="Collection">
+                                    <img class="ml-2" src="https://img.icons8.com/ios/30/000000/facebook-like--v1.png" /><span class="badge badge-light ml-2 mt-2">@likes.Count</span>
+                                </button>
+                            }
+                        }
+                    </div>
+                </form>
+            </div>
+        }
         <div class="col-lg-12 pt-2 pb-2 mb-2 bg-white rounded justify-content-center">
             @if (User.Identity.IsAuthenticated)
             {
                 <h5 class="h5 mb-2 mt-2">Ваш комментарий</h5>
                 <form class="form-group" method="post" asp-controller="Collection" asp-action="CreateComment">
                     <div asp-validation-summary="ModelOnly"></div>
-                    <input type="hidden" asp-for="UserId" value="@User.Claims.ElementAt(0).Value" />
-                    <input type="hidden" asp-for="CollectionElementId" value="@ViewBag.CollectionElement.Id" />
+                    <input type="hidden" asp-for="CommentViewModel.UserId" value="@User.Claims.ElementAt(0).Value" />
+                    <input type="hidden" asp-for="CommentViewModel.CollectionElementId" value="@ViewBag.CollectionElement.Id" />
                     <div class="form-group">
-                        <textarea class="form-control shadow-sm bg-white rounded" asp-for="Text" placeholder="Введите текст"></textarea>
-                        <span asp-validation-for="Text" class="text-danger"></span>
+                        <textarea class="form-control shadow-sm bg-white rounded" asp-for="CommentViewModel.Text" placeholder="Введите текст"></textarea>
+                        <span asp-validation-for="CommentViewModel.Text" class="text-danger"></span>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-success shadow-sm rounded">Отправить</button>
@@ -68,7 +103,7 @@
                 <a asp-controller="Profile" asp-action="Profile" asp-route-id="@comment.User.Id" class="h4 mb-2 mt-2">
                     @comment.User.UserName
                 </a>
-                <p>@comment.Text</p>
+                <p style="word-wrap: break-word;">@comment.Text</p>
             </div>
         }
     </div>

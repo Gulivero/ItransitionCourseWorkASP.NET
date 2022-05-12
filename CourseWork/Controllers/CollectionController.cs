@@ -76,7 +76,10 @@ namespace CourseWork.Controllers
         public async Task<IActionResult> CollectionElement(int id)
         {
             ViewBag.CollectionElement = await _db.CollectionElements
+                .Include(l => l.Likes)
+                .ThenInclude(u => u.User)
                 .Include(c => c.Comments)
+                .ThenInclude(u => u.User)
                 .Include(c => c.Collection)
                 .ThenInclude(u => u.User)
                 .Include(c => c.AdditionalFields)
@@ -259,16 +262,16 @@ namespace CourseWork.Controllers
         }
         [Authorize(Roles = "Unblocked")]
         [HttpPost]
-        public async Task<IActionResult> CreateComment(CommentViewModel model)
+        public async Task<IActionResult> CreateComment(CollectionElementViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var collectionElement =
-                    await _db.CollectionElements.FirstOrDefaultAsync(c => c.Id == model.CollectionElementId);
-                var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == model.UserId);
+                    await _db.CollectionElements.FirstOrDefaultAsync(c => c.Id == model.CommentViewModel.CollectionElementId);
+                var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == model.CommentViewModel.UserId);
                 var comment = new Comment
                 {
-                    Text = model.Text,
+                    Text = model.CommentViewModel.Text,
                     User = user,
                     CollectionElement = collectionElement
                 };
@@ -276,7 +279,42 @@ namespace CourseWork.Controllers
                 await _db.SaveChangesAsync();
             }
 
-            return RedirectToAction("CollectionElement", "Collection", new { id = model.CollectionElementId });
+            return RedirectToAction("CollectionElement", "Collection", new { id = model.CommentViewModel.CollectionElementId });
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CollectionElementLike(CollectionElementViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var collectionElement =
+                    await _db.CollectionElements.FirstOrDefaultAsync(c => c.Id == model.LikeViewModel.CollectionElementId);
+                var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == model.LikeViewModel.UserId);
+                var like = new Like
+                {
+                    User = user,
+                    CollectionElement = collectionElement
+                };
+                await _db.AddAsync(like);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("CollectionElement", "Collection", new { id = model.LikeViewModel.CollectionElementId });
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CollectionElementUnLike(CollectionElementViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var like = await _db.Likes
+                    .FirstOrDefaultAsync(l =>
+                        l.CollectionElement.Id == model.LikeViewModel.CollectionElementId && l.User.Id == model.LikeViewModel.UserId);
+                _db.Remove(like);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("CollectionElement", "Collection", new { id = model.LikeViewModel.CollectionElementId });
         }
     }
 }
