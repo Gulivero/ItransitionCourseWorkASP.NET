@@ -23,6 +23,7 @@ namespace CourseWork.Controllers
             var tags = new List<Tag>();
             if (!string.IsNullOrWhiteSpace(str))
             {
+                str = str.Trim();
                 foreach (var tag in str.Split())
                 {
                     if (await _db.Tags.AnyAsync(t => t.Name == tag))

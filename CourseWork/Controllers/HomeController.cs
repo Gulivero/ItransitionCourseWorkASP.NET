@@ -34,6 +34,7 @@ namespace CourseWork.Controllers
                 .OrderByDescending(c => c.Id)
                 .Take(3)
                 .ToListAsync();
+            ViewBag.Tags = await _db.Tags.ToListAsync();
             return View();
         }
     }
