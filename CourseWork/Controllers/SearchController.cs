@@ -34,7 +34,7 @@ namespace CourseWork.Controllers
                 .ThenInclude(u => u.User)
                 .Include(t => t.Tags)
                 .Include(c => c.Comments)
-                .Where(c => (c.Name + c.Collection.Description + c.Collection.Theme.Name + c.Collection.User.UserName).Contains(model.Query) || c.Comments.Any(c => unitedComments.Contains(c.Text)))
+                .Where(e => (e.Name + e.Collection.Description + e.Collection.Theme.Name + e.Collection.User.UserName).Contains(model.Query) || e.Comments.Any(c => c.Text.Contains(model.Query)) || e.Tags.Any(t => t.Name.Contains(model.Query)))
                 .ToListAsync();
             return View(model);
         }

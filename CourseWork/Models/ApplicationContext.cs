@@ -34,6 +34,31 @@ namespace CourseWork.Models
                     new Theme { Id = 5, Name = "Coins" },
                     new Theme { Id = 6, Name = "Gems" }
                 });
+            modelBuilder.Entity<CollectionElement>()
+                .HasOne(e => e.Collection)
+                .WithMany(c => c.Elements)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Like>()
+                .HasOne(e => e.CollectionElement)
+                .WithMany(c => c.Likes)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(e => e.CollectionElement)
+                .WithMany(c => c.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AdditionalField>()
+                .HasOne(e => e.CollectionElement)
+                .WithMany(c => c.AdditionalFields)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AdditionalFieldName>()
+                .HasOne(e => e.Collection)
+                .WithMany(c => c.AdditionalFieldsNames)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
     }
