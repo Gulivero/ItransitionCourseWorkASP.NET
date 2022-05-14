@@ -1,6 +1,7 @@
 ﻿using CourseWork.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,27 @@ namespace CourseWork.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationContext db;
+        private readonly ApplicationContext _db;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
-            db = context;
+            _db = context;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.Collections = await _db.Collections
+                .Include(c => c.Theme)
+                .Include(e => e.Elements)
+                .OrderByDescending(e => e.Elements.Count)
+                .Take(3)
+                .ToListAsync();
+            ViewBag.LastAddedCollectionElement = await _db.CollectionElements
+                .OrderByDescending(c => c.Id)
+                .Take(3)
+                .ToListAsync();
             return View();
         }
     }
