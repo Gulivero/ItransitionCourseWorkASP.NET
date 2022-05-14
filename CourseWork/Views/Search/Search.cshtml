@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Search result";
+}
+
+<div id="searchResult" class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div>
+                <a class="text-dark" asp-action="Index" asp-controller="Home">Назад</a>
+            </div>
+        </div>
+    </div>
+    <div class="row shadow bg-white rounded justify-content-center pt-4 pb-3 pl-2 pr-2">
+        <div class="col-lg-12 mb-3 ml-4 text-center">
+            <p class="h3">@ViewBag.CollectionElements.Count результатов по запросу: "@Model.Query"</p>
+        </div>
+        @foreach (var element in ViewBag.CollectionElements)
+        {
+            <div class="card bg-secondary  bg-white rounded mr-4 mb-4" style="width: 18rem;">
+@*                <a href="@collection.Image" data-toggle="lightbox" data-title="@collection.Title">
+                    <img src="@collection.Image" class="card-img-top shadow-sm bg-white rounded image-popup-no-margins img-card" alt="...">
+                </a>*@
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @element.Name
+                    </h5>
+                    <p class="card-text cropped-text">Коллекция: @element.Collection.Name</p>
+                    <p class="card-text cropped-text">Владелец: @element.Collection.User.UserName</p>
+                    <a asp-action="Collection" asp-controller="Collection" asp-route-id="@element.Collection.Id" class="btn btn-primary">Открыть коллекцию</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CourseWork.Controllers
 {
+    [Authorize(Roles = "Unblocked")]
     public class CollectionController : Controller
     {
         private readonly ApplicationContext _db;
@@ -43,14 +44,12 @@ namespace CourseWork.Controllers
             }
             return tags;
         }
-        [Authorize(Roles = "Unblocked")]
         public async Task<IActionResult> CreateCollection(string UserId)
         {
             ViewBag.Themes = await _db.Themes.ToListAsync();
             ViewBag.UserId = UserId;
             return View();
         }
-        [Authorize(Roles = "Unblocked")]
         public async Task<IActionResult> CreateCollectionElement(int id)
         {
             ViewBag.Collection = await _db.Collections
@@ -59,6 +58,7 @@ namespace CourseWork.Controllers
                 .SingleAsync();
             return View();
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Collection(int id)
         {
             ViewBag.Collection = await _db.Collections
@@ -73,6 +73,7 @@ namespace CourseWork.Controllers
 
             return View();
         }
+        [AllowAnonymous]
         public async Task<IActionResult> CollectionElement(int id)
         {
             ViewBag.CollectionElement = await _db.CollectionElements
@@ -89,7 +90,6 @@ namespace CourseWork.Controllers
                 .SingleAsync();
             return View();
         }
-        [Authorize(Roles = "Unblocked")]
         [HttpPost]
         public async Task<IActionResult> CreateCollectionElement(CreateCollectionElementViewModel model)
         {
@@ -119,7 +119,6 @@ namespace CourseWork.Controllers
                 .SingleAsync();
             return View(model);
         }
-        [Authorize(Roles = "Unblocked")]
         [HttpPost]
         public async Task<IActionResult> CreateCollection(CreateCollectionViewModel model)
         {
@@ -147,7 +146,6 @@ namespace CourseWork.Controllers
             ViewBag.UserId = user.Id;
             return View(model);
         }
-        [Authorize(Roles = "Unblocked")]
         public async Task<IActionResult> EditCollection(int id)
         {
             ViewBag.Collection = await _db.Collections
@@ -155,7 +153,6 @@ namespace CourseWork.Controllers
 
             return View();
         }
-        [Authorize(Roles = "Unblocked")]
         [HttpPost]
         public async Task<IActionResult> EditCollection(EditCollectionViewModel model)
         {
@@ -171,7 +168,6 @@ namespace CourseWork.Controllers
 
             return View(model);
         }
-        [Authorize(Roles = "Unblocked")]
         public async Task<IActionResult> EditCollectionElement(int id)
         {
             var collectionElement = await _db.CollectionElements
@@ -191,7 +187,6 @@ namespace CourseWork.Controllers
 
             return View();
         }
-        [Authorize(Roles = "Unblocked")]
         [HttpPost]
         public async Task<IActionResult> EditCollectionElement(EditCollectionElementViewModel model)
         {
@@ -220,7 +215,6 @@ namespace CourseWork.Controllers
             ViewBag.Tags = tags;
             return View(model);
         }
-        [Authorize(Roles = "Unblocked")]
         public async Task<IActionResult> DeleteCollection(int id)
         {
             var collection = await _db.Collections
@@ -242,7 +236,6 @@ namespace CourseWork.Controllers
 
             return RedirectToAction("Profile", "Profile", new { user.Id });
         }
-        [Authorize(Roles = "Unblocked")]
         public async Task<IActionResult> DeleteCollectionElement(int elementId)
         {
             var collectionElement = await _db.CollectionElements
@@ -260,7 +253,6 @@ namespace CourseWork.Controllers
 
             return RedirectToAction("Collection", "Collection", new { id });
         }
-        [Authorize(Roles = "Unblocked")]
         [HttpPost]
         public async Task<IActionResult> CreateComment(CollectionElementViewModel model)
         {
@@ -281,7 +273,6 @@ namespace CourseWork.Controllers
 
             return RedirectToAction("CollectionElement", "Collection", new { id = model.CommentViewModel.CollectionElementId });
         }
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CollectionElementLike(CollectionElementViewModel model)
         {
@@ -301,7 +292,6 @@ namespace CourseWork.Controllers
 
             return RedirectToAction("CollectionElement", "Collection", new { id = model.LikeViewModel.CollectionElementId });
         }
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CollectionElementUnLike(CollectionElementViewModel model)
         {
