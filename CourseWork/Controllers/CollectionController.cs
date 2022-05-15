@@ -108,6 +108,7 @@ namespace CourseWork.Controllers
                     Collection = collection,
                     Name = model.Name,
                     Tags = await MakeTagList(model.Tags),
+                    Image = model.Image,
                     AdditionalFields = model.AdditionalFields
                 };
                 await _db.AddAsync(collectionElement);
@@ -133,6 +134,7 @@ namespace CourseWork.Controllers
                     Description = model.Description,
                     Theme = theme,
                     User = user,
+                    Image = model.Image,
                     AdditionalFieldsNames = model.AdditionalFieldNames
                 };
 
@@ -162,6 +164,7 @@ namespace CourseWork.Controllers
                 var collection = await _db.Collections.FirstOrDefaultAsync(i => i.Id == model.Id);
                 collection.Name = model.Name;
                 collection.Description = model.Description;
+                collection.Image = model.Image;
                 _db.Update(collection);
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Collection", "Collection", new { id = model.Id });
@@ -198,7 +201,8 @@ namespace CourseWork.Controllers
             {
                 collectionElement.Name = model.Name;
                 collectionElement.Tags = await MakeTagList(model.Tags);
-                
+                collectionElement.Image = model.Image;
+
                 _db.Update(collectionElement);
                 await _db.SaveChangesAsync();
                 return RedirectToAction("CollectionElement", "Collection", new { id = model.Id });

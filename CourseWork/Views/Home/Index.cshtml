@@ -30,8 +30,9 @@
             {
                 <div class="col-lg-4 d-flex justify-content-center">
                     <div class="card bg-secondary bg-white rounded mb-4" style="width: 18rem;">
+                        <img src="@collection.Image" style="height: 18rem; width: 18rem; object-fit:cover;">
                         <div class="card-body">
-                            <h5 class="card-title">
+                            <h5 class="card-title text-center">
                                 @collection.Name
                             </h5>
                             <p>
@@ -52,15 +53,17 @@
             </div>
         </div>
         <div class="row">
-            @foreach (var lastAddedCollectionElement in ViewBag.LastAddedCollectionElement)
+            @foreach (var element in ViewBag.LastAddedCollectionElement)
             {
                 <div class="col-lg-4 d-flex justify-content-center">
                     <div class="card bg-secondary bg-white rounded mb-4" style="width: 18rem;">
+                        <img src="@element.Image" style="height: 18rem; width: 18rem; object-fit:cover;">
                         <div class="card-body">
-                            <h5 class="card-title">
-                                @lastAddedCollectionElement.Name
+                            <h5 class="card-title text-center">
+                                @element.Name
                             </h5>
-                            <a asp-action="CollectionElement" asp-controller="Collection" asp-route-id="@lastAddedCollectionElement.Id" class="btn btn-outline-primary btn-block">Открыть</a>
+                            <p>Коллекция: @element.Collection.Name</p>
+                            <a asp-action="CollectionElement" asp-controller="Collection" asp-route-id="@element.Id" class="btn btn-outline-primary btn-block">Открыть</a>
                         </div>
                     </div>
                 </div>

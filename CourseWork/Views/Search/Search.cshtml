@@ -10,8 +10,9 @@
         @foreach (var element in ViewBag.CollectionElements)
         {
             <div class="card bg-secondary  bg-white rounded mr-4 mb-4" style="width: 18rem;">
+                <img src="@element.Image" style="height: 18rem; width: 18rem; object-fit:cover;">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="card-title text-center">
                         @element.Name
                     </h5>
                     <p class="card-text cropped-text">Коллекция: @element.Collection.Name</p>

@@ -17,6 +17,9 @@ namespace CourseWork.ViewModels
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
+        [Display(Name = "Картинка")]
+        public string Image { get; set; }
+
         [Display(Name = "Тема")]
         public Theme Theme { get; set; }
 

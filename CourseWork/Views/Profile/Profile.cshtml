@@ -22,6 +22,7 @@
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr>
+                                <th scope="col">Картинка</th>
                                 <th scope="col">Название</th>
                                 @if (User.Identity.IsAuthenticated && (ViewBag.User.Id == User.Claims.ElementAt(0).Value || User.IsInRole("Admin")))
                                 {
@@ -33,6 +34,9 @@
                             @foreach (var collection in ViewBag.UserCollections)
                             {
                                 <tr>
+                                    <th>
+                                        <img class="rounded-circle" src="@collection.Image" value="" style="height: 66px; width: 66px; object-fit:cover;" />
+                                    </th>
                                     <th>
                                         <a asp-controller="Collection" asp-action="Collection" asp-route-id="@collection.Id">@collection.Name</a>
                                     </th>

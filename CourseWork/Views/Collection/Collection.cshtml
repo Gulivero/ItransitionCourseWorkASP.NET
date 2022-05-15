@@ -7,6 +7,9 @@
         <div class="col-lg-12 mt-2 justify-content-between custom-control-inline">
             <div>
                 <div>
+                    <img src="@ViewBag.Collection.Image" value="" style="height: 150px; width: 150px; object-fit:cover;" />
+                </div>
+                <div>
                     Владелец коллекции:
                     <a asp-controller="Profile" asp-action="Profile" asp-route-id="@ViewBag.Collection.User.Id">
                         @ViewBag.Collection.User.UserName
@@ -54,6 +57,7 @@
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr>
+                                <th scope="col">Картинка</th>
                                 <th scope="col">Название</th>
                                 @if (User.Identity.IsAuthenticated && (ViewBag.Collection.User.Id == User.Claims.ElementAt(0).Value || User.IsInRole("Admin")))
                                 {
@@ -65,6 +69,9 @@
                             @foreach (var collectionElement in ViewBag.Elements)
                             {
                                 <tr>
+                                    <th>
+                                        <img class="rounded-circle" src="@collectionElement.Image" value="" style="height: 66px; width: 66px; object-fit:cover;" />
+                                    </th>
                                     <th>
                                         <a asp-controller="Collection" asp-action="CollectionElement" asp-route-id="@collectionElement.Id">@collectionElement.Name</a>
                                     </th>

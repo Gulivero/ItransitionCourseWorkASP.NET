@@ -6,6 +6,7 @@ namespace CourseWork.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Image { get; set; }
         public Collection Collection { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Like> Likes { get; set; }

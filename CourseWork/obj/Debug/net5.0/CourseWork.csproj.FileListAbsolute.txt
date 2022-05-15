@@ -167,3 +167,5 @@ D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Debug\net5.0\Razor\Vi
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Debug\net5.0\Razor\Views\Collection\EditCollectionElement.cshtml.g.cs
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Debug\net5.0\Razor\Views\Collection\EditCollection.cshtml.g.cs
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Debug\net5.0\Razor\Views\Search\Search.cshtml.g.cs
+D:\Nikita\Work\ItransitionDotNet\CourseWork\CourseWork\bin\Debug\net5.0\CloudinaryDotNet.dll
+D:\Nikita\Work\ItransitionDotNet\CourseWork\CourseWork\bin\Debug\net5.0\Microsoft.Extensions.WebEncoders.dll

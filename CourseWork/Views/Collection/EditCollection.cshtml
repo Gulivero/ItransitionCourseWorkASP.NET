@@ -25,7 +25,18 @@
                     <input class="form-control shadow-sm bg-white rounded" asp-for="Description" placeholder="Введите Описание" value="@ViewBag.Collection.Description">
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <div></div>
+                <div class="form-group">
+                    <label asp-for="Image"></label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label form-control" for="customFile">Выбрать файл</label>
+                        <input type="hidden" id="file-upload-url" asp-for="Image" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="card border-white mt-1">
+                        <img src="" id="img-preview" value="" />
+                    </div>
+                </div>
                 <div>
                     <button type="submit" class="btn btn-primary btn-block">Отредактировать</button>
                 </div>
