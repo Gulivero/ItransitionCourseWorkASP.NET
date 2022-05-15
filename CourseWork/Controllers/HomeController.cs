@@ -26,11 +26,13 @@ namespace CourseWork.Controllers
         {
             ViewBag.Collections = await _db.Collections
                 .Include(c => c.Theme)
+                .Include(u => u.User)
                 .Include(e => e.Elements)
                 .OrderByDescending(e => e.Elements.Count)
                 .Take(3)
                 .ToListAsync();
             ViewBag.LastAddedCollectionElement = await _db.CollectionElements
+                .Include(t => t.Tags)
                 .OrderByDescending(c => c.Id)
                 .Take(3)
                 .ToListAsync();

@@ -39,8 +39,8 @@
                                 Тема:
                                 <span class="badge badge-info">@collection.Theme.Name</span>
                             </p>
-                            <p>Описание: @collection.Description</p>
                             <p>Кол-во предметов: @collection.Elements.Count</p>
+                            <p>Владелец: @collection.User.UserName</p>
                             <a asp-action="Collection" asp-controller="Collection" asp-route-id="@collection.Id" class="btn btn-outline-primary btn-block">Открыть</a>
                         </div>
                     </div>
@@ -63,6 +63,13 @@
                                 @element.Name
                             </h5>
                             <p>Коллекция: @element.Collection.Name</p>
+                            <p>
+                                Теги:
+                                @foreach (var tag in element.Tags)
+                                {
+                                    <span class="badge badge-info">@tag.Name</span>
+                                }
+                            </p>
                             <a asp-action="CollectionElement" asp-controller="Collection" asp-route-id="@element.Id" class="btn btn-outline-primary btn-block">Открыть</a>
                         </div>
                     </div>

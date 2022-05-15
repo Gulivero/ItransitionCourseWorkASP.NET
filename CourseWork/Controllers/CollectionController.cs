@@ -18,13 +18,14 @@ namespace CourseWork.Controllers
         {
             _db = db;
         }
+
         public async Task<List<Tag>> MakeTagList(string str)
         {
             var tags = new List<Tag>();
             if (!string.IsNullOrWhiteSpace(str))
             {
                 str = str.Trim();
-                foreach (var tag in str.Split())
+                foreach (var tag in str.Split(','))
                 {
                     if (await _db.Tags.AnyAsync(t => t.Name == tag))
                     {
@@ -44,6 +45,10 @@ namespace CourseWork.Controllers
                 }
             }
             return tags;
+        }
+        public IQueryable<string> GetTags()
+        {
+            return _db.Tags.Select(n => n.Name);
         }
         public async Task<IActionResult> CreateCollection(string UserId)
         {
@@ -178,16 +183,6 @@ namespace CourseWork.Controllers
                 .Include(t => t.Tags)
                 .FirstOrDefaultAsync(i => i.Id == id);
             ViewBag.CollectionElement = collectionElement;
-            var tagsList = collectionElement.Tags;
-            var tags = string.Empty;
-
-            foreach (var tag in tagsList)
-            {
-                tags += tag.Name + " ";
-            }
-            tags = tags.Remove(tags.Length - 1, 1);
-
-            ViewBag.Tags = tags;
 
             return View();
         }
@@ -200,7 +195,6 @@ namespace CourseWork.Controllers
             if (ModelState.IsValid)
             {
                 collectionElement.Name = model.Name;
-                collectionElement.Tags = await MakeTagList(model.Tags);
                 collectionElement.Image = model.Image;
 
                 _db.Update(collectionElement);
@@ -208,16 +202,6 @@ namespace CourseWork.Controllers
                 return RedirectToAction("CollectionElement", "Collection", new { id = model.Id });
             }
             ViewBag.CollectionElement = collectionElement;
-            var tagsList = collectionElement.Tags;
-            var tags = string.Empty;
-
-            foreach (var tag in tagsList)
-            {
-                tags += tag.Name + " ";
-            }
-            tags = tags.Remove(tags.Length - 1, 1);
-
-            ViewBag.Tags = tags;
             return View(model);
         }
         public async Task<IActionResult> DeleteCollection(int id)

@@ -30,7 +30,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Tags"></label>
-                    <input class="form-control" asp-for="Tags" placeholder="Введите теги через пробел" />
+                    <div id="example" class="form-control"></div>
+                    <input type="hidden" id="tags" asp-for="Tags"/>
                     <span asp-validation-for="Tags" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -46,7 +47,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary btn-block">Добавить</button>
+                    <button type="submit" class="btn btn-primary btn-block" onclick="getTags()">Добавить</button>
                 </div>
             </form>
         </div>

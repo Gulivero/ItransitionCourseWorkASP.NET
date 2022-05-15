@@ -30,11 +30,11 @@
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile">
                         <label class="custom-file-label form-control" for="customFile">Выбрать файл</label>
-                        <input type="hidden" id="file-upload-url" asp-for="Image" />
+                        <input type="hidden" id="file-upload-url" asp-for="Image" value="@ViewBag.Collection.Image"/>
                         <span asp-validation-for="Image" class="text-danger"></span>
                     </div>
                     <div class="card border-white mt-1">
-                        <img src="" id="img-preview" value="" />
+                        <img src="@ViewBag.Collection.Image" id="img-preview" value="" />
                     </div>
                 </div>
                 <div>
