@@ -45,6 +45,15 @@ D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery\dist\jquery.min.js
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery\dist\jquery.min.map
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\jquery\LICENSE.txt
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\.gitignore
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\.npmignore
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\bower.json
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\composer.json
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\magicsuggest.css
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\magicsuggest.jquery.json
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\magicsuggest.js
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\package.json
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\wwwroot\lib\magicsuggest-master\magicsuggest-master\README.md
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\appsettings.Development.json
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\appsettings.json
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\PubTmp\Out\CourseWork.dll

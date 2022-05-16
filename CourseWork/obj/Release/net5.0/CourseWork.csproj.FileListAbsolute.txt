@@ -167,3 +167,4 @@ D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\refint
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\CourseWork.pdb
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\CourseWork.genruntimeconfig.cache
 D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\ref\CourseWork.dll
+D:\Nikita\Work\ItransitionDotNet\coursework\CourseWork\obj\Release\net5.0\Razor\Views\Collection\_GetComments.cshtml.g.cs
