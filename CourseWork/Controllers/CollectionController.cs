@@ -18,6 +18,16 @@ namespace CourseWork.Controllers
         {
             _db = db;
         }
+        [HttpGet]
+        public async Task<ActionResult> GetComments(int elementId)
+        {
+            var comments = await _db.Comments
+                .Include(e => e.CollectionElement)
+                .Include(u => u.User)
+                .Where(c => c.CollectionElement.Id == elementId)
+                .ToListAsync();
+            return PartialView("_GetComments", comments);
+        }
 
         public async Task<List<Tag>> MakeTagList(string str)
         {

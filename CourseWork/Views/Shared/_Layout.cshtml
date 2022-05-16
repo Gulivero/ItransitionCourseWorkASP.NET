@@ -133,6 +133,25 @@
             document.getElementById('tags').value = tags;
         }
     </script>
+    <script>
+    function worker(id)
+    {
+        $.ajax(
+        {
+            url: '@Url.Action("GetComments")',
+            type: 'GET',
+            data: { "elementId": id },
+
+            success: function (partialView)
+            {
+                $('#commentsList').html(partialView);
+                $('#commentsList').show();
+            }
+        });
+        setTimeout(worker, 5000, id);
+    }
+
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

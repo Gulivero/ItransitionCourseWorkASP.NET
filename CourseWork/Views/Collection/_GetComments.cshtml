@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Comment>
+
+@foreach (var comment in Model)
+{
+    <div class="col-lg-11 pt-2 pb-2 mb-2 bg-white shadow ml-3">
+        <a asp-controller="Profile" asp-action="Profile" asp-route-id="@comment.User.Id" class="h4 mb-2 mt-2">
+            @comment.User.UserName
+        </a>
+        <p style="word-wrap: break-word;">@comment.Text</p>
+    </div>
+}
