@@ -7,7 +7,7 @@
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
-    <History>True|2022-05-16T01:05:47.0507092Z;True|2022-05-15T23:21:44.7049774+03:00;False|2022-05-15T23:20:15.5044479+03:00;</History>
+    <History>True|2022-05-16T01:14:21.0789912Z;True|2022-05-16T04:05:47.0507092+03:00;True|2022-05-15T23:21:44.7049774+03:00;False|2022-05-15T23:20:15.5044479+03:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
